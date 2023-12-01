@@ -51,6 +51,7 @@ if(isset($_POST["action"]) && $_POST["action"] == 'filter-asset-category'){
       <td class="text-center"><small><?php echo $assets["DAMAGE_TYPE"]; ?></small></td>
       <td class="text-center"><small><?php echo $assets["PARTS"]; ?></small></td>
       <td class="text-center"><small>₱ <?php echo number_format($assets["REPAIR_COST"], 2); ?></small></td>
+      <td class="text-center"><small><?php echo $assets["DEPARTMENT"]; ?></small></td>
     </tr>
     <?php
     $count++;

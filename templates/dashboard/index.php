@@ -111,7 +111,16 @@ else{
     </div>
 </div>
 <br>
-
+<div class="row">
+    <div class="col">
+        <div class="container card-container" style="padding-left: 0; padding-right: 0">
+            <center>
+                <b> Top 10 Department with Most Damages </b>
+                <div id="damagesPerDepartment"></div>
+            </center>
+        </div>
+    </div>
+<br>
 <style>
     .card-container{
         background: #313131;

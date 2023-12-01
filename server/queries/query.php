@@ -103,8 +103,9 @@ if(isset($_POST["inventory_in"])){
     $purchaseCost = mysqli_real_escape_string($conn, $_POST["purchase_cost"]);
     $utilization = mysqli_real_escape_string($conn, $_POST["utilization"]);
     $intensity = mysqli_real_escape_string($conn, $_POST["intensity"]);
+    $department = mysqli_real_escape_string($conn, $_POST["department"]);
 
-    $query = mysqli_query($conn, "INSERT INTO tbl_inventory (SERIAL_NO, CATEGORY, ASSET_NAME, PURCHASE_DATE, PURCHASE_COST, UTILIZATION, INTENSITY, STATUS) VALUES ('$id', '$category', '$assetName', '$purchaseDate', '$purchaseCost', '$utilization', '$intensity', 'Functional')");
+    $query = mysqli_query($conn, "INSERT INTO tbl_inventory (SERIAL_NO, CATEGORY, ASSET_NAME, PURCHASE_DATE, PURCHASE_COST, UTILIZATION, INTENSITY, STATUS, DEPARTMENT) VALUES ('$id', '$category', '$assetName', '$purchaseDate', '$purchaseCost', '$utilization', '$intensity', 'Functional', '$department')");
     if($query){
         LogActivity("Inventory In. [". $id . "]");
         header("location:../../?page=inventory-info&id=" . $id);
@@ -221,7 +222,7 @@ if(isset($_POST["exportdata"])){
         $datefrom = mysqli_real_escape_string($conn, $_POST["datefrom"]);
         $dateto = mysqli_real_escape_string($conn, $_POST["dateto"]);
 
-        $query = mysqli_query($conn, "SELECT tbl_inventory.SERIAL_NO, tbl_assets.ASSET, tbl_inventory.ASSET_NAME, tbl_inventory.PURCHASE_DATE, tbl_inventory.PURCHASE_COST, tbl_inventory.UTILIZATION, tbl_inventory.INTENSITY, tbl_inventory.STATUS FROM tbl_assets, tbl_inventory WHERE tbl_assets.ID = tbl_inventory.CATEGORY AND tbl_inventory.PURCHASE_DATE BETWEEN '$datefrom' AND '$dateto'");
+        $query = mysqli_query($conn, "SELECT tbl_inventory.SERIAL_NO, tbl_assets.ASSET, tbl_inventory.ASSET_NAME, tbl_inventory.PURCHASE_DATE, tbl_inventory.PURCHASE_COST, tbl_inventory.UTILIZATION, tbl_inventory.INTENSITY, tbl_inventory.STATUS, tbl_inventory.DEPARTMENT FROM tbl_assets, tbl_inventory WHERE tbl_assets.ID = tbl_inventory.CATEGORY AND tbl_inventory.PURCHASE_DATE BETWEEN '$datefrom' AND '$dateto'");
         if(mysqli_num_rows($query) > 0){
             $output .= "
                 <table class='table' bordered='1'>
@@ -234,6 +235,7 @@ if(isset($_POST["exportdata"])){
                         <th>UTILIZATION</th>
                         <th>INTENSITY</th>
                         <th>STATUS</th>
+                        <th>DEPARTMENT</th>
                     </tr>
             ";
 
@@ -248,6 +250,7 @@ if(isset($_POST["exportdata"])){
                         <td>" . $row["UTILIZATION"] . "</td>
                         <td>" . $row["INTENSITY"] . "</td>
                         <td>" . $row["STATUS"] . "</td>
+                        <td>" . $row["DEPARTMENT"] . "</td>
                     </tr>
                 ";
             }
@@ -270,6 +273,7 @@ if(isset($_POST["exportdata"])){
                         <th>UTILIZATION</th>
                         <th>INTENSITY</th>
                         <th>STATUS</th>
+                        <th>DEPARTMENT</th>
                     </tr>
                     <tr>
                         <td colspan=8>No Records Found</td>
@@ -295,6 +299,7 @@ if(isset($_POST["exportdata"])){
                         <th>CAUSE OF DAMAGE</th>
                         <th>DAMAGED COMPONENT</th>
                         <th>REPAIR COST</th>
+                        <th>DEPARTMENT</th>
                     </tr>
             ";
 
@@ -307,6 +312,7 @@ if(isset($_POST["exportdata"])){
                         <td>" . $row["DAMAGE_TYPE"] . "</td>
                         <td>" . $row["PARTS"] . "</td>
                         <td>PHP " . number_format($row["REPAIR_COST"], 2) . "</td>
+                        <td>" . $row["DEPARTMENT"] . "</td>
                     </tr>
                 ";
             }

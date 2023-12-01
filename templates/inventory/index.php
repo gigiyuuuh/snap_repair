@@ -48,11 +48,12 @@ if(isset($_POST["page"]) && $_POST["page"] == "inventory"){
         <th class="text-center"><small>Intensity</small></th>
         <th class="text-center"><small>Status</small></th>
         <th class="text-center"></th>
+        <th class="text-center"><small>Department</small></th>
     </tr>
   </thead>
   <tbody>
     <?php
-    $query = mysqli_query($conn, "SELECT tbl_inventory.SERIAL_NO, tbl_inventory.ASSET_NAME, tbl_inventory.PURCHASE_DATE, tbl_inventory.PURCHASE_COST, tbl_inventory.UTILIZATION, tbl_inventory.INTENSITY, tbl_inventory.STATUS FROM tbl_inventory, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_assets.STATUS != 'Archived'");
+    $query = mysqli_query($conn, "SELECT tbl_inventory.SERIAL_NO, tbl_inventory.ASSET_NAME, tbl_inventory.PURCHASE_DATE, tbl_inventory.PURCHASE_COST, tbl_inventory.UTILIZATION, tbl_inventory.INTENSITY, tbl_inventory.STATUS, tbl_inventory.DEPARTMENT FROM tbl_inventory, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_assets.STATUS != 'Archived'");
     if(mysqli_num_rows($query) > 0){
       while($assets = mysqli_fetch_array($query)){
         ?>
@@ -67,6 +68,7 @@ if(isset($_POST["page"]) && $_POST["page"] == "inventory"){
           <td class="text-center">
             <button class="btn btn-success btn-sm" onclick="window.location.href='?page=inventory-info&id=<?php echo $assets['SERIAL_NO']; ?>'"><i class='bx bxs-detail'></i><small> View Details</small></button>
           </td>
+          <td class="text-center"><small><?php echo $assets["DEPARTMENT"]; ?></small></td>
       </tr>
         <?php
       }
@@ -144,7 +146,23 @@ if(isset($_POST["page"]) && $_POST["page"] == "inventory"){
               <input type="number" name="intensity" class="form-control" required>
             </div>
           </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <small>Department Name: <span class="text-danger">*</span></small>
+              <select name="department" id="" class="form-control">
+                <option value="Human Resources">Human Resources</option>
+                <option value="Operations Management">Operations Management</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sales">Sales</option>
+                <option value="Accounting and Finance">Accounting and Finance</option>
+                <option value="Production and Development">Production and Development</option>
+                <option value="Main Office">Main Office</option>
+              </select>
+            </div>
         </div>
+        <br>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" name="inventory_in" class="btn btn-primary">Save</button>
