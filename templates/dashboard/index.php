@@ -381,3 +381,54 @@ else{
       chart.draw(data, options);
     }
 </script>
+
+<!-- Top 10 Departments with Most Damages Chart -->
+<!-- NEED PA PALITAN YUNG VALUES -->
+<script>
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+      var data = google.visualization.arrayToDataTable([
+        ['Asset Type', 'Frequency',],
+        <?php
+        $query = mysqli_query($conn, "SELECT tbl_assets.ASSET, COUNT(tbl_assets.ASSET) AS `value_occurrence` FROM tbl_assets, tbl_damagereports, tbl_inventory WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_inventory.CATEGORY = tbl_assets.ID GROUP BY tbl_assets.ASSET ORDER BY `value_occurrence` DESC LIMIT 10");
+        while($row = mysqli_fetch_array($query)){
+            echo "['" . $row["ASSET"] . "', " . number_format($row["value_occurrence"], 0, '.', '') . "],";
+        }
+        ?>
+      ]);
+
+      var options = {
+        chartArea: {width: '70%', height: '100%'},
+        hAxis: {
+          title: 'Department with Most Damages',
+          titleTextStyle: {
+                color: '#fff'
+            },
+            textStyle: {
+                color: 'white'
+            },
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Department',
+          titleTextStyle: {
+                color: '#fff'
+            },
+            textStyle: {
+                color: 'white'
+            }
+        },
+        backgroundColor: '#313131',
+        legend: {
+            position: 'none', 
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('damagesPerDepartment'));
+
+      chart.draw(data, options);
+    }
+</script>
+
