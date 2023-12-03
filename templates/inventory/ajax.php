@@ -20,6 +20,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "filter"){
             <td class="text-center"><small><?php echo $inventory["STATUS"]; ?></small></td>
             <td class="text-center">
                 <button class="btn btn-success btn-sm" onclick="window.location.href='?page=inventory-info&id=<?php echo $inventory['SERIAL_NO']; ?>'"><i class='bx bxs-detail'></i><small> View Details</small></button>
+                <td class="text-center"><small><?php echo $inventory["DEPARTMENT"]; ?></small></td>
             </td>
             </tr>
             <?php
@@ -41,6 +42,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "filter"){
             <td class="text-center"><small><?php echo $inventory["STATUS"]; ?></small></td>
             <td class="text-center">
                 <button class="btn btn-success btn-sm" onclick="window.location.href='?page=inventory-info&id=<?php echo $inventory['SERIAL_NO']; ?>'"><i class='bx bxs-detail'></i><small> View Details</small></button>
+                <td class="text-center"><small><?php echo $inventory["DEPARTMENT"]; ?></small></td>
             </td>
             </tr>
             <?php
