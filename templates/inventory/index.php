@@ -19,6 +19,21 @@ if(isset($_POST["page"]) && $_POST["page"] == "inventory"){
   <div class="col">
     <h4 class="mb-5"><b>Inventory</b></h4>
   </div>
+  <br>
+ 
+  <div class="col-3">
+    <select name="asset_category" id="dd_asset_category" class="form-control form-control-sm">
+      <option value="all">All Department</option>
+      <option value="Human Resources">Human Resources</option>
+      <option value="Operation Management">Operation Management</option>
+      <option value="Information Technology">Information Technology</option>
+      <option value="Marketing">Marketing</option>
+      <option value="Sales">Sales</option>
+      <option value="Accounting and Finance">Accounting and Finance</option>
+      <option value="Production and Development">Production and Development</option>
+      <option value="Main Office">Main Office</option>
+    </select>
+  </div>
   <div class="col-3">
     <select name="asset_category" id="asset_category" class="form-control form-control-sm">
         <option value="all">All Assets</option>
@@ -28,7 +43,7 @@ if(isset($_POST["page"]) && $_POST["page"] == "inventory"){
           ?>
           <option value="<?php echo $assets["ID"]; ?>"><?php echo $assets["ASSET"]; ?></option>
           <?php
-        }
+            }
         ?>
     </select>
   </div>
