@@ -29,14 +29,14 @@ if(isset($_POST["action"]) && $_POST["action"] == 'filter-asset-category'){
     $sql;
 
     if($category == 'all'){
-        $sql = "SELECT tbl_damagereports.ASSET_ID, tbl_assets.CATEGORY, tbl_assets.ASSET, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO ORDER BY tbl_damagereports.DAMAGE_DATE DESC";
+        $sql = "SELECT tbl_damagereports.ASSET_ID, tbl_assets.CATEGORY, tbl_assets.ASSET, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_inventory.DEPARTMENT, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO ORDER BY tbl_damagereports.DAMAGE_DATE DESC";
     }
     else{
         if($type == 'all'){
-            $sql = "SELECT tbl_damagereports.ASSET_ID, tbl_assets.CATEGORY, tbl_assets.ASSET, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_assets.CATEGORY = '$category' ORDER BY tbl_damagereports.DAMAGE_DATE DESC";
+            $sql = "SELECT tbl_damagereports.ASSET_ID, tbl_assets.CATEGORY, tbl_assets.ASSET, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_inventory.DEPARTMENT, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_assets.CATEGORY = '$category' ORDER BY tbl_damagereports.DAMAGE_DATE DESC";
         }
         else{
-            $sql = "SELECT tbl_damagereports.ASSET_ID, tbl_assets.CATEGORY, tbl_assets.ASSET, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_assets.CATEGORY = '$category' AND tbl_assets.ID = '$type' ORDER BY tbl_damagereports.DAMAGE_DATE DESC";
+            $sql = "SELECT tbl_damagereports.ASSET_ID, tbl_assets.CATEGORY, tbl_assets.ASSET, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_inventory.DEPARTMENT, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports, tbl_assets WHERE tbl_inventory.CATEGORY = tbl_assets.ID AND tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_assets.CATEGORY = '$category' AND tbl_assets.ID = '$type' ORDER BY tbl_damagereports.DAMAGE_DATE DESC";
         }
     }
 

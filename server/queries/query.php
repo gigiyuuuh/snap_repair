@@ -87,8 +87,9 @@ if(isset($_POST["add_asset"])){
     $purchaseCost = mysqli_real_escape_string($conn, $_POST["purchase_cost"]);
     $utilization = mysqli_real_escape_string($conn, $_POST["utilization"]);
     $intensity = mysqli_real_escape_string($conn, $_POST["intensity"]);
+    $department = mysqli_real_escape_string($conn, $_POST["department"]);
 
-    $query = mysqli_query($conn, "INSERT INTO tbl_inventory (SERIAL_NO, CATEGORY, ASSET_NAME, PURCHASE_DATE, PURCHASE_COST, UTILIZATION, INTENSITY, STATUS) VALUES ('$id', '$category', '$assetName', '$purchaseDate', '$purchaseCost', '$utilization', '$intensity', 'Functional')");
+    $query = mysqli_query($conn, "INSERT INTO tbl_inventory (SERIAL_NO, CATEGORY, ASSET_NAME, PURCHASE_DATE, PURCHASE_COST, UTILIZATION, INTENSITY, STATUS, DEPARTMENT) VALUES ('$id', '$category', '$assetName', '$purchaseDate', '$purchaseCost', '$utilization', '$intensity', 'Functional', '$department')");
     if($query){
         LogActivity("Inventory In. [". $id . "]");
         header("location:../../?page=asset-info&id=" . $category);
@@ -288,7 +289,7 @@ if(isset($_POST["exportdata"])){
     else if($datatype == 'damagereports'){
         $datefrom = mysqli_real_escape_string($conn, $_POST["datefrom"]);
         $dateto = mysqli_real_escape_string($conn, $_POST["dateto"]);
-        $query = mysqli_query($conn, "SELECT tbl_damagereports.DAMAGE_DATE, tbl_assets.ASSET, tbl_inventory.ASSET_NAME, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST FROM tbl_assets, tbl_inventory, tbl_damagereports WHERE tbl_assets.ID = tbl_inventory.CATEGORY AND tbl_inventory.SERIAL_NO = tbl_damagereports.ASSET_ID AND tbl_inventory.PURCHASE_DATE BETWEEN '$datefrom' AND '$dateto' ORDER BY tbl_damagereports.DAMAGE_DATE DESC");
+        $query = mysqli_query($conn, "SELECT tbl_damagereports.DAMAGE_DATE, tbl_assets.ASSET, tbl_inventory.ASSET_NAME, tbl_inventory.DEPARTMENT, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST FROM tbl_assets, tbl_inventory, tbl_damagereports WHERE tbl_assets.ID = tbl_inventory.CATEGORY AND tbl_inventory.SERIAL_NO = tbl_damagereports.ASSET_ID AND tbl_inventory.PURCHASE_DATE BETWEEN '$datefrom' AND '$dateto' ORDER BY tbl_damagereports.DAMAGE_DATE DESC");
         if(mysqli_num_rows($query) > 0){
             $output .= "
                 <table class='table' bordered='1'>
@@ -399,15 +400,16 @@ if(isset($_POST["importdata"])){
                 $utilization = mysqli_real_escape_string($conn, $row["4"]);
                 $intensity = mysqli_real_escape_string($conn, $row["5"]);
                 $status = mysqli_real_escape_string($conn, $row["6"]);
+                $department = mysqli_real_escape_string($conn, $row["7"]);
 
                 $purchaseDate = date_format(date_create(strval($purchaseDate)), "Y-m-d");
 
-                if($category != "" && $assetName != "" && $purchaseDate != "" && $purchaseCost != "" && $utilization != "" && $intensity != "" && $status != ""){
+                if($category != "" && $assetName != "" && $purchaseDate != "" && $purchaseCost != "" && $utilization != "" && $intensity != "" && $status != "" && $department != ""){
                     $query = mysqli_query($conn, "SELECT * FROM tbl_assets WHERE ASSET = '$category' LIMIT 1");
                     if(mysqli_num_rows($query) > 0){
                         $asset = mysqli_fetch_assoc($query);
                         $category = $asset["ID"];
-                        $query = mysqli_query($conn, "INSERT INTO tbl_inventory (SERIAL_NO, CATEGORY, ASSET_NAME, PURCHASE_DATE, PURCHASE_COST, UTILIZATION, INTENSITY, STATUS) VALUES ('$id', '$category', '$assetName', '$purchaseDate', '$purchaseCost', '$utilization', '$intensity', '$status')");
+                        $query = mysqli_query($conn, "INSERT INTO tbl_inventory (SERIAL_NO, CATEGORY, ASSET_NAME, PURCHASE_DATE, PURCHASE_COST, UTILIZATION, INTENSITY, STATUS, DEPARTMENT) VALUES ('$id', '$category', '$assetName', '$purchaseDate', '$purchaseCost', '$utilization', '$intensity', '$status', '$department')");
                         $inventoryCount++;
                     }
                 }
