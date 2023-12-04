@@ -334,6 +334,7 @@ if(isset($_POST["exportdata"])){
                         <th>CAUSE OF DAMAGE</th>
                         <th>DAMAGED COMPONENT</th>
                         <th>REPAIR COST</th>
+                        <th>DEPARTMENT</th>
                     </tr>
                     <tr>
                         <td colspan=6>No Records Found</td>
