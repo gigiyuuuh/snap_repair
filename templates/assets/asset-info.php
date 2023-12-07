@@ -158,7 +158,8 @@ if(isset($_GET["id"])){
                                 <th><small>Utilization</small></th>
                                 <th><small>Intensity</small></th>
                                 <th><small>Status</small></th>
-                                <th></th>
+                                <th><small></small></th>
+                                <th><small>Department</small></th>
                             </thead>
                             <tbody>
                                 <?php
@@ -175,6 +176,7 @@ if(isset($_GET["id"])){
                                         <td><small><?php echo $inventory["INTENSITY"]; ?> Hrs</small></td>
                                         <td><small><?php echo $inventory["STATUS"]; ?></small></td>
                                         <td><small><button class="btn btn-sm btn-success" onclick="window.location.href='?page=inventory-info&id=<?php echo $inventory['SERIAL_NO']; ?>'"><i class='bx bxs-detail'></i> <small>View Details</small></button></small></td>
+                                        <td><small><?php echo $inventory["DEPARTMENT"]; ?></small></td>
                                     </tr>
                                     <?php
                                     $count++;

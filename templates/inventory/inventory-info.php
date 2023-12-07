@@ -378,12 +378,13 @@ if(isset($_GET["id"])){
                             <th class="text-center"><small>Damage Type</small></th>
                             <th class="text-center"><small>Damaged Component</small></th>
                             <th class="text-center"><small>Repair Cost</small></th>
+                            <th class="text-center"><small>Department</small></th>
                         
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $query = mysqli_query($conn, "SELECT tbl_damagereports.ASSET_ID, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN FROM tbl_inventory, tbl_damagereports WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_damagereports.ASSET_ID = '$id' ORDER BY tbl_damagereports.DAMAGE_DATE DESC");
+                        $query = mysqli_query($conn, "SELECT tbl_damagereports.ASSET_ID, tbl_damagereports.DAMAGE_DATE, tbl_inventory.ASSET_NAME, tbl_damagereports.DAMAGE_TYPE, tbl_damagereports.PARTS, tbl_damagereports.REPAIR_COST, tbl_damagereports.ASSET_SPAN, tbl_inventory.DEPARTMENT FROM tbl_inventory, tbl_damagereports WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_damagereports.ASSET_ID = '$id' ORDER BY tbl_damagereports.DAMAGE_DATE DESC");
                         if(mysqli_num_rows($query) > 0){
                         $count = 1;
                         while($assets = mysqli_fetch_array($query)){
@@ -394,6 +395,7 @@ if(isset($_GET["id"])){
                             <td class="text-center"><small><?php echo $assets["DAMAGE_TYPE"]; ?></small></td>
                             <td class="text-center"><small><?php echo $assets["PARTS"]; ?></small></td>
                             <td class="text-center"><small>₱ <?php echo number_format($assets["REPAIR_COST"], 2); ?></small></td>
+                            <td class="text-center"><small><?php echo $assets["DEPARTMENT"]; ?></small></td>
                         </tr>
                             <?php
                             $count++;
