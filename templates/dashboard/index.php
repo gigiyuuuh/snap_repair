@@ -390,11 +390,11 @@ else{
 
     function drawBasic() {
       var data = google.visualization.arrayToDataTable([
-        ['Asset Type', 'Frequency',],
+        ['Department', 'Frequency',],
         <?php
-        $query = mysqli_query($conn, "SELECT tbl_assets.ASSET, COUNT(tbl_assets.ASSET) AS `value_occurrence` FROM tbl_assets, tbl_damagereports, tbl_inventory WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_inventory.CATEGORY = tbl_assets.ID GROUP BY tbl_assets.ASSET ORDER BY `value_occurrence` DESC LIMIT 10");
+        $query = mysqli_query($conn, "SELECT tbl_inventory.DEPARTMENT, COUNT(tbl_inventory.DEPARTMENT) AS `value_occurrence` FROM tbl_assets, tbl_damagereports, tbl_inventory WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_inventory.CATEGORY = tbl_assets.ID GROUP BY tbl_inventory.DEPARTMENT ORDER BY `value_occurrence` DESC LIMIT 10");
         while($row = mysqli_fetch_array($query)){
-            echo "['" . $row["ASSET"] . "', " . number_format($row["value_occurrence"], 0, '.', '') . "],";
+            echo "['" . $row["DEPARTMENT"] . "', " . number_format($row["value_occurrence"], 0, '.', '') . "],";
         }
         ?>
       ]);
