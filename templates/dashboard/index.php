@@ -97,7 +97,7 @@ else{
         <div class="container card-container" style="padding-left: 0; padding-right: 0">
             <center>
                 <b>Top 10 Reported Damages Based on Asset types</b>
-                <div id="damagesOnAssetTypes"></div>
+                <div id="damagesOnAssetTypes" style="width: 98%"></div>
             </center>
         </div>
     </div>
@@ -115,8 +115,8 @@ else{
     <div class="col">
         <div class="container card-container" style="padding-left: 0; padding-right: 0">
             <center>
-                <b> Top 10 Department with Most Damages </b>
-                <div id="damagesPerDepartment"></div>
+                <b> Top 5 Department with Most Damages </b>
+                <div id="damagesPerDepartment" style="width: 98%"></div>
             </center>
         </div>
     </div>
@@ -131,6 +131,7 @@ else{
         height: 100vh;
     }
 </style>
+<br>
 
 
 <!-- Load Asset Status Chart -->
@@ -382,7 +383,7 @@ else{
     }
 </script>
 
-<!-- Top 10 Departments with Most Damages Chart -->
+<!-- Top 5 Departments with Most Damages Chart -->
 <!-- NEED PA PALITAN YUNG VALUES -->
 <script>
     google.charts.load('current', {packages: ['corechart', 'bar']});
@@ -392,7 +393,7 @@ else{
       var data = google.visualization.arrayToDataTable([
         ['Department', 'Frequency',],
         <?php
-        $query = mysqli_query($conn, "SELECT tbl_inventory.DEPARTMENT, COUNT(tbl_inventory.DEPARTMENT) AS `value_occurrence` FROM tbl_assets, tbl_damagereports, tbl_inventory WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_inventory.CATEGORY = tbl_assets.ID GROUP BY tbl_inventory.DEPARTMENT ORDER BY `value_occurrence` DESC LIMIT 10");
+        $query = mysqli_query($conn, "SELECT tbl_inventory.DEPARTMENT, COUNT(tbl_inventory.DEPARTMENT) AS `value_occurrence` FROM tbl_assets, tbl_damagereports, tbl_inventory WHERE tbl_damagereports.ASSET_ID = tbl_inventory.SERIAL_NO AND tbl_inventory.CATEGORY = tbl_assets.ID GROUP BY tbl_inventory.DEPARTMENT ORDER BY `value_occurrence` DESC LIMIT 5");
         while($row = mysqli_fetch_array($query)){
             echo "['" . $row["DEPARTMENT"] . "', " . number_format($row["value_occurrence"], 0, '.', '') . "],";
         }
