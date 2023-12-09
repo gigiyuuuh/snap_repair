@@ -431,12 +431,11 @@ if(isset($_POST["importdata"])){
                 $damageType = mysqli_real_escape_string($conn, $row["2"]);
                 $repairCost = mysqli_real_escape_string($conn, $row["4"]);
                 $damageDate = mysqli_real_escape_string($conn, $row["1"]);
-                $department = mysqli_real_escape_string($conn, $row["5"]);
 
                 $damageDate = date_format(date_create(strval($damageDate)), "Y-m-d");
 
-                if($assetID != "" && $damagedPart != "" && $damageType != "" && $repairCost != "" && $damageDate != "" && $department != ""){
-                    $query = mysqli_query($conn, "INSERT INTO tbl_damagereports (ASSET_ID, DAMAGE_TYPE, PARTS, REPAIR_COST, DAMAGE_DATE, DEPARTMENT_DAMAGE) VALUES ('$assetID', '$damageType', '$damagedPart', '$repairCost', '$damageDate', '$department)");   
+                if($assetID != "" && $damagedPart != "" && $damageType != "" && $repairCost != "" && $damageDate != ""){
+                    $query = mysqli_query($conn, "INSERT INTO tbl_damagereports (ASSET_ID, DAMAGE_TYPE, PARTS, REPAIR_COST, DAMAGE_DATE) VALUES ('$assetID', '$damageType', '$damagedPart', '$repairCost', '$damageDate')");   
                     $damageCount++;
                 }
             }
