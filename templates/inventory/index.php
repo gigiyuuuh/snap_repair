@@ -22,19 +22,6 @@ if(isset($_POST["page"]) && $_POST["page"] == "inventory"){
   <br>
  
   <div class="col-3">
-    <select name="department_category" id="dd_department_category" class="form-control form-control-sm">
-      <option value="all">All Department</option>
-      <option value="Human Resources">Human Resources</option>
-      <option value="Operation Management">Operation Management</option>
-      <option value="Information Technology">Information Technology</option>
-      <option value="Marketing">Marketing</option>
-      <option value="Sales">Sales</option>
-      <option value="Accounting and Finance">Accounting and Finance</option>
-      <option value="Production and Development">Production and Development</option>
-      <option value="Main Office">Main Office</option>
-    </select>
-  </div>
-  <div class="col-3">
     <select name="asset_category" id="asset_category" class="form-control form-control-sm">
         <option value="all">All Assets</option>
         <?php
